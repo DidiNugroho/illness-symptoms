@@ -123,3 +123,45 @@ const getHighestChance = (symptoms) => {
     (first, second) => second.count - first.count
   )[0];
 };
+
+
+const symptomsList = getsymptoms()
+const symptomsListDiv = document.getElementById("symptoms-list")
+const searchInput = document.querySelector('input[type="text"]');  
+const searchButton = document.getElementById("search-symptoms");
+
+const renderSymptoms = (symptoms) => {
+    symptomsListDiv.innerHTML = ''; // Clear existing symptoms  
+    const limitedSymptoms = symptoms.slice(0, 5); // Limiting to first 5 symptoms  
+
+    limitedSymptoms.forEach(symptom => {  
+        const container = document.createElement('div');  
+        container.classList.add('checkbox');  
+
+        const input = document.createElement('input');  
+        input.type = "checkbox";  
+        input.id = symptom;  
+        input.value = symptom;
+        input.style.marginTop = "2%" 
+
+        const label = document.createElement('label');  
+        label.htmlFor = symptom;  
+        label.innerText = symptom;
+        label.style.marginLeft = "18%"  
+        label.style.marginTop = "2%"  
+
+        container.appendChild(input);  
+        container.appendChild(label);  
+        symptomsListDiv.appendChild(container);  
+    });  
+};
+
+renderSymptoms(symptomsList);  
+
+searchButton.addEventListener('click', () => {
+    let search = searchInput.value.toLowerCase()
+    let filteredSymptoms = symptomsList.filter(symptom => 
+        symptom.toLowerCase().includes(search)
+    )
+    renderSymptoms(filteredSymptoms)
+})

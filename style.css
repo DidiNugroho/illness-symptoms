@@ -1,38 +1,45 @@
-h1 {
-    text-align: center;
+h1 {  
+    text-align: center;  
+}  
+
+h3 {  
+    text-align: center;  
+}  
+
+form {  
+    text-align: center;  
+}  
+
+body {  
+    background-image: url(img/—Pngtree—simple\ cartoon\ character\ health\ protection_1273572.png);  
+    background-repeat: no-repeat;  
+    background-size: 100% 100%;  
+    background-attachment: fixed;  
+}  
+
+div {  
+    margin-top: 10%;  
+}  
+
+button {  
+    background-color: whitesmoke;  
+}  
+
+button:hover {  
+   background-color: grey;  
+}  
+
+input {  
+    margin-top: 1%;  
+    width: 20em;  
+    height: 1.8em;  
+    border-radius: 7px;  
+}  
+
+#symptoms-list {
+    margin-left: 25%;
 }
-
-h3 {
-    text-align: center;
-}
-
-
-form {
-    text-align: center;
-}
-
-body {
-    background-image: url(img/—Pngtree—simple\ cartoon\ character\ health\ protection_1273572.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-}
-
-div {
-    margin-top: 10%;
-}
-
-button {
-    background-color: whitesmoke;
-}
-
-button:hover {
-   background-color: grey;
-}
-
-input {
-    margin-top: 1%;
-    width: 20em;
-    height: 1.8em;
-    border-radius: 7px;
+#symptoms-list {
+    margin-left: 25%;
+    margin-top: 20px; /* Add some space above the symptoms list */  
 }
