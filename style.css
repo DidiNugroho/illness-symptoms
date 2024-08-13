@@ -18,7 +18,7 @@ body {
 }  
 
 div {  
-    margin-top: 10%;  
+    margin-top: 8%;  
 }  
 
 button {  
@@ -38,8 +38,10 @@ input {
 
 #symptoms-list {
     margin-left: 25%;
-}
-#symptoms-list {
-    margin-left: 25%;
     margin-top: 20px; /* Add some space above the symptoms list */  
+}
+
+#diagnosis-results {
+    padding-top: 2%;
+    padding-left: 10%;
 }

@@ -115,6 +115,7 @@ const diagnose = (symptoms) => {
   return result;
 };
 
+
 // parameter symptoms : array of symptoms
 // return : object of illness name and count
 const getHighestChance = (symptoms) => {
@@ -124,15 +125,47 @@ const getHighestChance = (symptoms) => {
   )[0];
 };
 
+const handleCheckboxChange = () => {  
+  const checkedSymptoms = Array.from
+  (document.querySelectorAll('input[type="checkbox"]:checked'))
+  .map(input => input.value);  
+  
+  const diagnosis = diagnose(checkedSymptoms)
+  const highestChance = getHighestChance(checkedSymptoms);  
+
+  const diagnosisResultsDiv = document.getElementById("diagnosis-results");   
+  diagnosisResultsDiv.innerHTML = "";  
+    
+  // Show checked symptoms  
+  if (checkedSymptoms.length > 0) {  
+    diagnosisResultsDiv.innerHTML += `<p>Checked Symptoms: ${checkedSymptoms.join(', ')}</p>`;  
+  } else {  
+    diagnosisResultsDiv.innerHTML += `<p>No symptoms checked.</p>`;  
+  }  
+
+  // Show diagnosis  
+  if (diagnosis.length > 0) {  
+      diagnosisResultsDiv.innerHTML += `<p>Possible Illness(es) based on checked symptoms:</p>`;  
+      diagnosis.forEach(item => {  
+      diagnosisResultsDiv.innerHTML += `<p>- ${item.name}</p>`;  
+    });  
+  } else {  
+      diagnosisResultsDiv.innerHTML += `<p>No illness matches the selected symptoms.</p>`;  
+  }  
+
+  // Show highest chance diagnosis  
+  if (highestChance) {  
+      diagnosisResultsDiv.innerHTML += `<p>Highest chance of possible illness: ${highestChance.name}</p>`;  
+  }
+}; 
 
 const symptomsList = getsymptoms()
 const symptomsListDiv = document.getElementById("symptoms-list")
-const searchInput = document.querySelector('input[type="text"]');  
-const searchButton = document.getElementById("search-symptoms");
+const searchInput = document.querySelector('input[type="text"]');
 
 const renderSymptoms = (symptoms) => {
     symptomsListDiv.innerHTML = ''; // Clear existing symptoms  
-    const limitedSymptoms = symptoms.slice(0, 5); // Limiting to first 5 symptoms  
+    const limitedSymptoms = symptoms.slice(0, 4); // Limiting to first 5 symptoms  
 
     limitedSymptoms.forEach(symptom => {  
         const container = document.createElement('div');  
@@ -143,6 +176,7 @@ const renderSymptoms = (symptoms) => {
         input.id = symptom;  
         input.value = symptom;
         input.style.marginTop = "2%" 
+        input.addEventListener('change', handleCheckboxChange)
 
         const label = document.createElement('label');  
         label.htmlFor = symptom;  
@@ -150,18 +184,25 @@ const renderSymptoms = (symptoms) => {
         label.style.marginLeft = "18%"  
         label.style.marginTop = "2%"  
 
+
         container.appendChild(input);  
         container.appendChild(label);  
         symptomsListDiv.appendChild(container);  
     });  
 };
 
-renderSymptoms(symptomsList);  
+renderSymptoms(symptomsList);   
 
-searchButton.addEventListener('click', () => {
-    let search = searchInput.value.toLowerCase()
-    let filteredSymptoms = symptomsList.filter(symptom => 
-        symptom.toLowerCase().includes(search)
-    )
-    renderSymptoms(filteredSymptoms)
-})
+searchInput.addEventListener('input', () => {  
+  const searchValue = searchInput.value.toLowerCase(); // Get the input value  
+
+  if (searchValue === "") {  
+      renderSymptoms(symptomsList); // Show all symptoms again if input is empty  
+  } else {  
+      // Filter symptoms based on the search value  
+      const filteredSymptoms = symptomsList.filter(symptom =>   
+          symptom.toLowerCase().includes(searchValue)  
+      );  
+      renderSymptoms(filteredSymptoms); // Render filtered symptoms  
+  }
+});
