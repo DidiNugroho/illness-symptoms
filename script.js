@@ -80,18 +80,46 @@ const illness = [
   },
 ];
 
-// @return array of illness name
-const getSymptomps = () => {
-  const symptomps = [];
+//  return : array of symptoms
+const getsymptoms = () => {
+  const symptoms = [];
   illness.forEach((ill) => {
     ill.symptoms.forEach((sym) => {
-      if (!symptomps.includes(sym)) {
-        symptomps.push(sym);
+      if (!symptoms.includes(sym)) {
+        symptoms.push(sym);
       }
     });
   });
-  return symptomps;
+  return symptoms;
 };
 
-// memastikan DOM sudah terload
-document.addEventListener("DOMContentLoaded", () => {});
+// parameter symptoms : array of symptoms
+// return : array of illness name
+const diagnose = (symptoms) => {
+  let result = [];
+  illness.forEach((ill) => {
+    let count = 0;
+    ill.symptoms.forEach((sym) => {
+      if (symptoms.includes(sym)) {
+        count++;
+      }
+    });
+
+    if (!count) return;
+
+    result.push({
+      name: ill.name,
+      count,
+    });
+  });
+  return result;
+};
+
+// parameter symptoms : array of symptoms
+// return : object of illness name and count
+const getHighestChance = (symptoms) => {
+  // get  highest count
+  return diagnose(symptoms).sort(
+    (first, second) => second.count - first.count
+  )[0];
+};
