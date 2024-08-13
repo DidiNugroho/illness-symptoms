@@ -22,9 +22,17 @@ div {
     margin-top: 10%;
 }
 
+button {
+    background-color: whitesmoke;
+}
+
+button:hover {
+   background-color: grey;
+}
+
 input {
     margin-top: 1%;
     width: 20em;
-    height: 1.5em;
+    height: 1.8em;
     border-radius: 7px;
 }
