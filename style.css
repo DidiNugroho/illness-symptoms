@@ -11,7 +11,7 @@ form {
     text-align: center;
 }
 
-html {
+body {
     background-image: url(img/—Pngtree—simple\ cartoon\ character\ health\ protection_1273572.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -20,4 +20,11 @@ html {
 
 div {
     margin-top: 10%;
+}
+
+input {
+    margin-top: 1%;
+    width: 20em;
+    height: 1.5em;
+    border-radius: 7px;
 }
