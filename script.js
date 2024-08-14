@@ -140,6 +140,10 @@ const handleCheckboxChange = (event) => {
     checkedSymptoms = checkedSymptoms.filter(sym => sym !== symptomValue);  
   }  
 
+  displayDiagnosis(); // Call function to update the UI
+};
+
+const displayDiagnosis = () => {
   const diagnosis = diagnose(checkedSymptoms);  
   const highestChance = getHighestChance(checkedSymptoms);  
   
@@ -173,8 +177,8 @@ const handleCheckboxChange = (event) => {
   if (highestChance) {  
     result.innerHTML = "Diagnose";   
     diagnosisResultsDiv.innerHTML += `<p>Highest chance of possible illness: ${highestChance.name}</p>`;  
-  }  
-}; 
+  }
+}
 
 const symptomsList = getsymptoms()
 const symptomsListDiv = document.getElementById("symptoms-list")
