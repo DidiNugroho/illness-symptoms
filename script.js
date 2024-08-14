@@ -125,46 +125,55 @@ const getHighestChance = (symptoms) => {
   )[0];
 };
 
-const handleCheckboxChange = () => {  
-  const checkedSymptoms = Array.from
-  (document.querySelectorAll('input[type="checkbox"]:checked'))
-  .map(input => input.value);  
-  
-  const diagnosis = diagnose(checkedSymptoms)
-  const highestChance = getHighestChance(checkedSymptoms);  
+// Variable to store checked symptoms  
+let checkedSymptoms = [];  
 
-  const result = document.getElementById("diagnose")
+// Handler for checkbox change  
+const handleCheckboxChange = (event) => {  
+  const symptomValue = event.target.value;  
+
+  if (event.target.checked) {  
+    if (!checkedSymptoms.includes(symptomValue)) {  
+      checkedSymptoms.push(symptomValue);  
+    }  
+  } else {  
+    checkedSymptoms = checkedSymptoms.filter(sym => sym !== symptomValue);  
+  }  
+
+  const diagnosis = diagnose(checkedSymptoms);  
+  const highestChance = getHighestChance(checkedSymptoms);  
+  
+  const result = document.getElementById("diagnose");  
   const diagnosisResultsDiv = document.getElementById("diagnosis-results");   
   diagnosisResultsDiv.innerHTML = "";  
-  result.innerHTML = ""
-  
+  result.innerHTML = "";  
+
   // Show checked symptoms  
-  if (checkedSymptoms.length > 0) { 
-    result.innerHTML = "Diagnose" 
+  if (checkedSymptoms.length > 0) {   
+    result.innerHTML = "Diagnose";   
     diagnosisResultsDiv.innerHTML += `<p>Checked Symptoms: ${checkedSymptoms.join(', ')}</p>`;  
-  } else { 
-    result.innerHTML = "Diagnose"  
+  } else {   
+    result.innerHTML = "Diagnose";  
     diagnosisResultsDiv.innerHTML += `<p>No symptoms checked.</p>`;  
   }  
 
   // Show diagnosis  
   if (diagnosis.length > 0) {  
-      result.innerHTML = "Diagnose" 
-      diagnosisResultsDiv.innerHTML += `<p>Possible Illness(es) based on checked symptoms:</p>`;  
-      diagnosis.forEach(item => {  
-      result.innerHTML = "Diagnose" 
+    result.innerHTML = "Diagnose";   
+    diagnosisResultsDiv.innerHTML += `<p>Possible Illness(es) based on checked symptoms:</p>`;  
+    diagnosis.forEach(item => {  
       diagnosisResultsDiv.innerHTML += `<p>- ${item.name}</p>`;  
     });  
-  } else {
-      result.innerHTML = "Diagnose"   
-      diagnosisResultsDiv.innerHTML += `<p>No illness matches the selected symptoms.</p>`;  
+  } else {  
+    result.innerHTML = "Diagnose";  
+    diagnosisResultsDiv.innerHTML += `<p>No illness matches the selected symptoms.</p>`;  
   }  
 
   // Show highest chance diagnosis  
   if (highestChance) {  
-      result.innerHTML = "Diagnose" 
-      diagnosisResultsDiv.innerHTML += `<p>Highest chance of possible illness: ${highestChance.name}</p>`;  
-  }
+    result.innerHTML = "Diagnose";   
+    diagnosisResultsDiv.innerHTML += `<p>Highest chance of possible illness: ${highestChance.name}</p>`;  
+  }  
 }; 
 
 const symptomsList = getsymptoms()
