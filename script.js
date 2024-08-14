@@ -125,6 +125,15 @@ const getHighestChance = (symptoms) => {
   )[0];
 };
 
+// Function to shuffle an array  
+const shuffleArray = (array) => {  
+  for (let i = array.length - 1; i > 0; i--) {  
+    const j = Math.floor(Math.random() * (i + 1)); // Random index  
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements  
+  }  
+  return array;  
+};
+
 // Variable to store checked symptoms  
 let checkedSymptoms = [];  
 
@@ -180,13 +189,13 @@ const displayDiagnosis = () => {
   }
 }
 
-const symptomsList = getsymptoms()
+const symptomsList = shuffleArray(getsymptoms())
 const symptomsListDiv = document.getElementById("symptoms-list")
 const searchInput = document.querySelector('input[type="text"]');
 
 const renderSymptoms = (symptoms) => {
     symptomsListDiv.innerHTML = ''; // Clear existing symptoms  
-    const limitedSymptoms = symptoms.slice(0, 4); // Limiting to first 5 symptoms  
+    const limitedSymptoms = symptoms.slice(0, 4); // Limiting to first 4 symptoms  
 
     limitedSymptoms.forEach(symptom => {  
         const container = document.createElement('div');  
