@@ -1,28 +1,56 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8" />  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  
-    <link rel="stylesheet" href="style.css" />  
-    <title>Illness Diagnosis</title>  
-</head>  
-<body>  
-    <div class="container-fluid">  
-        <h1>Illness Search Engine</h1>  
-        <h3>Find the name of possible illness based on symptoms</h3>  
-        <form>  
-            <input type="text" placeholder="Enter symptoms" />
-            <button id="reset-button">Reset</button>    
-        </form>  
-        <div id="symptoms-list"></div> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Illness Diagnosis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="bg-primary">
+      <div class="container">
+        <div>
+          <h1 class="text-white">Illness Search Engine</h1>
+          <p>Find the name of possible illness based on symptoms</p>
+        </div>
+        <div class="flex-1"></div>
+        <div>
+          <img class="illustration" src="./img/doctor.svg" alt="" srcset="" />
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <form>
+          <div class="search-container">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter symptoms"
+            />
+            <button class="btn btn-primary" id="reset-button">Reset</button>
+          </div>
+        </form>
+        <div id="symptoms-list"></div>
         <div id="result">
-            <h3 id="diagnose" style="padding-right: 60%;"></h3>
-            <p id="diagnosis-results"></p> <!-- New paragraph for dynamic results -->   
-        </div> 
-    </div>   
-    <script src="script.js"></script>  
-</body>  
+          <h3 id="diagnose"></h3>
+          <p id="diagnosis-results"></p>
+          <!-- New paragraph for dynamic results -->
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
 </html>
