@@ -1,47 +1,86 @@
-h1 {  
-    text-align: center;  
-}  
+form {
+  text-align: center;
+}
 
-h3 {  
-    text-align: center;  
-}  
+body {
+  /* background-image: url(img/—Pngtree—simple\ cartoon\ character\ health\ protection_1273572.png);   */
+  font-family: "Quicksand", sans-serif;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
 
-form {  
-    text-align: center;  
-}  
+/* div {
+  margin-top: 8%;
+} */
 
-body {  
-    background-image: url(img/—Pngtree—simple\ cartoon\ character\ health\ protection_1273572.png);  
-    background-repeat: no-repeat;  
-    background-size: 100% 100%;  
-    background-attachment: fixed;  
-}  
+button {
+  background-color: whitesmoke;
+}
 
-div {  
-    margin-top: 8%;  
-}  
+button:hover {
+  background-color: grey;
+}
 
-button {  
-    background-color: whitesmoke;  
-}  
-
-button:hover {  
-   background-color: grey;  
-}  
-
-input {  
-    margin-top: 1%;  
-    width: 20em;  
-    height: 1.8em;  
-    border-radius: 7px;  
-}  
+input {
+  margin-top: 1%;
+  width: 20em;
+  height: 1.8em;
+  border-radius: 7px;
+}
 
 #symptoms-list {
-    margin-left: 25%;
-    margin-top: 20px; /* Add some space above the symptoms list */  
+  margin-top: 20px; /* Add some space above the symptoms list */
 }
 
 #diagnosis-results {
-    padding-top: 2%;
-    padding-left: 10%;
+  padding-top: 2%;
+}
+
+.search-container {
+  display: flex;
+  align-items: end;
+  gap: 2rem;
+}
+
+#result {
+  margin-top: 10rem;
+}
+
+header {
+  display: flex;
+}
+
+header h1 {
+  color: white;
+}
+
+main {
+  margin-top: 4rem;
+}
+
+header .container {
+  padding: 8rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.illustration {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    flex-flow: column-reverse;
+    text-align: center;
+  }
+
+  .illustration {
+    margin-top: 2rem;
+  }
 }

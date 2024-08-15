@@ -115,7 +115,6 @@ const diagnose = (symptoms) => {
   return result;
 };
 
-
 // parameter symptoms : array of symptoms
 // return : object of illness name and count
 const getHighestChance = (symptoms) => {
@@ -125,114 +124,129 @@ const getHighestChance = (symptoms) => {
   )[0];
 };
 
-// Function to shuffle an array  
-const shuffleArray = (array) => {  
-  for (let i = array.length - 1; i > 0; i--) {  
-    const j = Math.floor(Math.random() * (i + 1)); // Random index  
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements  
-  }  
-  return array;  
+// Function to shuffle an array
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // Random index
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+  return array;
 };
 
-// Variable to store checked symptoms  
-let checkedSymptoms = [];  
+// Variable to store checked symptoms
+let checkedSymptoms = [];
 
-// Handler for checkbox change  
-const handleCheckboxChange = (event) => {  
-  const symptomValue = event.target.value;  
+// Handler for checkbox change
+const handleCheckboxChange = (event) => {
+  const symptomValue = event.target.value;
 
-  if (event.target.checked) {  
-    if (!checkedSymptoms.includes(symptomValue)) {  
-      checkedSymptoms.push(symptomValue);  
-    }  
-  } else {  
-    checkedSymptoms = checkedSymptoms.filter(sym => sym !== symptomValue);  
-  }  
+  if (event.target.checked) {
+    if (!checkedSymptoms.includes(symptomValue)) {
+      checkedSymptoms.push(symptomValue);
+    }
+  } else {
+    checkedSymptoms = checkedSymptoms.filter((sym) => sym !== symptomValue);
+  }
 
   displayDiagnosis(); // Call function to update the UI
 };
 
 const displayDiagnosis = () => {
-  const diagnosis = diagnose(checkedSymptoms);  
-  const highestChance = getHighestChance(checkedSymptoms);  
-  
-  const result = document.getElementById("diagnose");  
-  const diagnosisResultsDiv = document.getElementById("diagnosis-results");   
-  diagnosisResultsDiv.innerHTML = "";  
-  result.innerHTML = "";  
+  const diagnosis = diagnose(checkedSymptoms);
+  const highestChance = getHighestChance(checkedSymptoms);
 
-  // Show checked symptoms  
-  if (checkedSymptoms.length > 0) {   
-    result.innerHTML = "Diagnose";   
-    diagnosisResultsDiv.innerHTML += `<p>Checked Symptoms: ${checkedSymptoms.join(', ')}</p>`;  
-  } else {   
-    result.innerHTML = "Diagnose";  
-    diagnosisResultsDiv.innerHTML += `<p>No symptoms checked.</p>`;  
-  }  
+  const result = document.getElementById("diagnose");
+  const diagnosisResultsDiv = document.getElementById("diagnosis-results");
+  diagnosisResultsDiv.innerHTML = "";
+  result.innerHTML = "";
 
-  // Show diagnosis  
-  if (diagnosis.length > 0) {  
-    result.innerHTML = "Diagnose";   
-    diagnosisResultsDiv.innerHTML += `<p>Possible Illness(es) based on checked symptoms:</p>`;  
-    diagnosis.forEach(item => {  
-      diagnosisResultsDiv.innerHTML += `<p>- ${item.name}</p>`;  
-    });  
-  } else {  
-    result.innerHTML = "Diagnose";  
-    diagnosisResultsDiv.innerHTML += `<p>No illness matches the selected symptoms.</p>`;  
-  }  
-
-  // Show highest chance diagnosis  
-  if (highestChance) {  
-    result.innerHTML = "Diagnose";   
-    diagnosisResultsDiv.innerHTML += `<p>Highest chance of possible illness: ${highestChance.name}</p>`;  
+  // Show checked symptoms
+  if (checkedSymptoms.length > 0) {
+    result.innerHTML = "Diagnose";
+    diagnosisResultsDiv.innerHTML += `<p>Checked Symptoms: ${checkedSymptoms.join(
+      ", "
+    )}</p>`;
+  } else {
+    result.innerHTML = "Diagnose";
+    diagnosisResultsDiv.innerHTML += `<p>No symptoms checked.</p>`;
   }
-}
 
-const symptomsList = shuffleArray(getsymptoms())
-const symptomsListDiv = document.getElementById("symptoms-list")
+  // Show diagnosis
+  if (diagnosis.length > 0) {
+    result.innerHTML = "Diagnose";
+    diagnosisResultsDiv.innerHTML += `<p>Possible Illness(es) based on checked symptoms:</p>`;
+    diagnosis.forEach((item) => {
+      diagnosisResultsDiv.innerHTML += `<p>- ${item.name}</p>`;
+    });
+  } else {
+    result.innerHTML = "Diagnose";
+    diagnosisResultsDiv.innerHTML += `<p>No illness matches the selected symptoms.</p>`;
+  }
+
+  // Show highest chance diagnosis
+  if (highestChance) {
+    result.innerHTML = "Diagnose";
+    diagnosisResultsDiv.innerHTML += `<p>Highest chance of possible illness: ${highestChance.name}</p>`;
+  }
+};
+
+const symptomsList = shuffleArray(getsymptoms());
+const symptomsListDiv = document.getElementById("symptoms-list");
 const searchInput = document.querySelector('input[type="text"]');
 
 const renderSymptoms = (symptoms) => {
-    symptomsListDiv.innerHTML = ''; // Clear existing symptoms  
-    const limitedSymptoms = symptoms.slice(0, 4); // Limiting to first 4 symptoms  
+  symptomsListDiv.innerHTML = ""; // Clear existing symptoms
+  const limitedSymptoms = symptoms.slice(0, 8); // Limiting to first 4 symptoms
 
-    limitedSymptoms.forEach(symptom => {  
-        const container = document.createElement('div');  
-        container.classList.add('checkbox');  
+  limitedSymptoms.forEach((symptom) => {
+    const container = document.createElement("div");
+    container.style.margin = "2rem 0";
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    // container.classList.add("checkbox");
 
-        const input = document.createElement('input');  
-        input.type = "checkbox";  
-        input.id = symptom;  
-        input.value = symptom;
-        input.style.marginTop = "2%" 
-        input.addEventListener('change', handleCheckboxChange)
+    const label = document.createElement("label");
+    label.style.display = "inline-block";
+    label.style.fontWeight = "normal";
+    label.htmlFor = symptom;
+    label.innerText = symptom;
+    label.style.marginLeft = "1rem";
+    label.style.cursor = "pointer";
 
-        const label = document.createElement('label');  
-        label.htmlFor = symptom;  
-        label.innerText = symptom;
-        label.style.marginLeft = "18%"  
-        label.style.marginTop = "2%"  
+    const input = document.createElement("input");
+    input.style.display = "inline-block";
+    input.style.margin = "0";
+    input.style.padding = "0";
+    input.style.width = "4rem";
+    input.type = "checkbox";
+    input.id = symptom;
+    input.value = symptom;
+    input.addEventListener("change", handleCheckboxChange);
 
+    for (let i = 0; i < checkedSymptoms.length; i++) {
+      if (checkedSymptoms[i] === symptom) {
+        input.checked = true;
+      }
+    }
 
-        container.appendChild(input);  
-        container.appendChild(label);  
-        symptomsListDiv.appendChild(container);  
-    });  
+    container.appendChild(input);
+    container.appendChild(label);
+    symptomsListDiv.appendChild(container);
+  });
 };
 
-renderSymptoms(symptomsList);   
+renderSymptoms(symptomsList);
 
-searchInput.addEventListener('input', () => {  
-  const searchValue = searchInput.value.toLowerCase(); // Get the input value  
+searchInput.addEventListener("input", () => {
+  const searchValue = searchInput.value.toLowerCase(); // Get the input value
 
-  if (searchValue === "") {  
-      renderSymptoms(symptomsList); // Show all symptoms again if input is empty  
-  } else {  
-      // Filter symptoms based on the search value  
-      const filteredSymptoms = symptomsList.filter(symptom =>   
-          symptom.toLowerCase().includes(searchValue)  
-      );  
-      renderSymptoms(filteredSymptoms); // Render filtered symptoms  
+  if (searchValue === "") {
+    renderSymptoms(symptomsList); // Show all symptoms again if input is empty
+  } else {
+    // Filter symptoms based on the search value
+    const filteredSymptoms = symptomsList.filter((symptom) =>
+      symptom.toLowerCase().includes(searchValue)
+    );
+    renderSymptoms(filteredSymptoms); // Render filtered symptoms
   }
 });
